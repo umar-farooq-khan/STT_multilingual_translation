@@ -13,18 +13,20 @@
 
 body {
         font-family: 'Montserrat', sans-serif;
-        font-size: 30px;
+        font-size: 20px;
 
        }
 
            .blue-background {
             color: white;        /* Text color */
             background-color: blue; /* Background color */
+            font-size: 30px;
+
         }
 </style>
 <body>
 
-    <button id="startButton">Start Speech Recognition</button>
+    <button id="startButton">Start!!!</button>
     <p id="output1"></p>
     <p id="output2"></p>
     <p id="output3"></p>
@@ -348,9 +350,8 @@ output9.classList.remove("blue-background");
         break;
           case 9:
         output9.textContent = transcript;
-                    output9.classList.add("blue-background");
-                         output1.style.color = 'black';
-                       output1.classList.remove("blue-background");
+                    //output9.classList.add("blue-background");
+                    output1.classList.remove("blue-background");
                     output2.classList.remove("blue-background");
                     output3.classList.remove("blue-background");
                     output4.classList.remove("blue-background");
@@ -358,7 +359,6 @@ output9.classList.remove("blue-background");
                     output6.classList.remove("blue-background");
                     output7.classList.remove("blue-background");
                     output8.classList.remove("blue-background");
-                    output9.classList.remove("blue-background");
 
         break;
     default:
@@ -374,8 +374,6 @@ output9.classList.remove("blue-background");
             output8.textContent = '';
             output9.textContent = '';
 
-            // ... include clear statements for output3 to output9 ...
-            output9.textContent = '';
             myArray = []; // Reset the array
             break;
 
