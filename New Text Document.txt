@@ -1,0 +1,235 @@
+<!--    <script>
+
+        const startButton = document.getElementById('startButton');
+        const output = document.getElementById('output');
+        const recognition = new webkitSpeechRecognition(); // For Chrome, use webkitSpeechRecognition
+        const output1 = document.getElementById('output1');  // Output element 1
+        const output2 = document.getElementById('output2');  // Output element 2
+        const output3 = document.getElementById('output3');  // Output element 3
+        const output4 = document.getElementById('output4');  // Output element 4
+        const output5 = document.getElementById('output5');  // Output element 5
+        const output6 = document.getElementById('output6');  // Output element 5
+        const output7 = document.getElementById('output7');  // Output element 5
+        const output8 = document.getElementById('output8');  // Output element 5
+        const output9 = document.getElementById('output9');  // Output element 5
+
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'ur-PK';
+        let sentences = []; // Declare and initialize the sentences array here
+        let myArray = []
+        const maxSentences = 10;
+        recognition.onstart = () => {
+            console.log('Speech recognition started');
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            recognition.start();
+        };
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[event.results.length - 1][0].transcript;
+
+  console.log('Speech recognition result', transcript);
+// push transcript to array
+myArray.push(transcript);
+
+// based on the length of array, set content on different output elements
+switch (myArray.length) {
+    case 1:
+        output1.textContent = transcript;
+        break;
+    case 2:
+        output2.textContent = transcript;
+        break;
+    case 3:
+        output3.textContent = transcript;
+        break;
+    case 4:
+        output4.textContent = transcript;
+        break;
+    case 5:
+        output5.textContent = transcript;
+        break;
+        case 6:
+        output6.textContent = transcript;
+        break;
+            case 7:
+        output7.textContent = transcript;
+        break;
+          case 8:
+        output8.textContent = transcript;
+        break;
+          case 9:
+        output9.textContent = transcript;
+        break;
+    default:
+            console.log('Exceeded max number of outputs');
+            // Clear all outputs and reset the array
+            output1.textContent = '';
+            output2.textContent = '';
+            output3.textContent = '';
+            output4.textContent = '';
+            output5.textContent = '';
+            output6.textContent = '';
+            output7.textContent = '';
+            output8.textContent = '';
+            output9.textContent = '';
+
+            // ... include clear statements for output3 to output9 ...
+            output9.textContent = '';
+            myArray = []; // Reset the array
+            break;
+
+};
+
+startButton.addEventListener('click', () => {
+    console.log('Speech recognition started');
+    recognition.start();
+});
+};
+
+
+        startButton.addEventListener('click', () => {
+            console.log('Speech recognition started');
+            recognition.start();
+        });
+    </script>-->
+##
+
+
+
+
+
+#####
+
+
+<!--
+        <script>
+
+        const startButton = document.getElementById('startButton');
+        const output = document.getElementById('output');
+        const recognition = new webkitSpeechRecognition(); // For Chrome, use webkitSpeechRecognition
+        const output1 = document.getElementById('output1');  // Output element 1
+        const output2 = document.getElementById('output2');  // Output element 2
+        const output3 = document.getElementById('output3');  // Output element 3
+        const output4 = document.getElementById('output4');  // Output element 4
+        const output5 = document.getElementById('output5');  // Output element 5
+        const output6 = document.getElementById('output6');  // Output element 5
+        const output7 = document.getElementById('output7');  // Output element 5
+        const output8 = document.getElementById('output8');  // Output element 5
+        const output9 = document.getElementById('output9');  // Output element 5
+
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'ur-PK';
+        let sentences = []; // Declare and initialize the sentences array here
+        let myArray = []
+        const maxSentences = 13;
+        recognition.onstart = () => {
+            console.log('Speech recognition started');
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            recognition.start();
+        };
+
+               recognition.onaudioend = (event) => {
+            console.error('Speech recognition onaudioend:');
+        };
+recognition.onspeechstart = () => {
+  console.log("Speech has been detected");
+};
+                       recognition.onaudiostart = (event) => {
+            console.error('Speech recognition onaudiostart:');
+            recognition.start();
+        };
+
+        recognition.onspeechend = () => {
+  console.log("Speech has stopped being detected");
+};
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[event.results.length - 1][0].transcript;
+
+         //console.log(event.results[0].isFinal);
+         myArray.push(transcript);
+        persentence=15
+
+// based on the length of array, set content on different output elements
+switch (myArray.length) {
+    case 1:
+    output1.textContent = transcript;
+        break;
+    case 2:
+
+       output2.textContent = transcript;
+
+        break;
+    case 3:
+
+
+        output3.textContent = transcript;
+
+        break;
+    case 4:
+
+       output4.textContent = transcript;
+
+        break;
+    case 5:
+
+       output5.textContent = transcript;
+
+        break;
+        case 6:
+
+       output6.textContent = transcript;
+
+        break;
+            case 7:
+
+       output7.textContent = transcript;
+
+        break;
+          case 8:
+  output8.textContent = transcript;
+        break;
+          case 9:
+     output9.textContent = transcript;}
+        break;
+    default:
+            console.log('Exceeded max number of outputs');
+            // Clear all outputs and reset the array
+            output1.textContent = '';
+            output2.textContent = '';
+            output3.textContent = '';
+            output4.textContent = '';
+            output5.textContent = '';
+            output6.textContent = '';
+            output7.textContent = '';
+            output8.textContent = '';
+            output9.textContent = '';
+
+            // ... include clear statements for output3 to output9 ...
+            output9.textContent = '';
+            myArray = []; // Reset the array
+            break;
+
+};
+
+startButton.addEventListener('click', () => {
+    console.log('Speech recognition started');
+    recognition.start();
+});
+};
+
+
+        startButton.addEventListener('click', () => {
+            console.log('Speech recognition started');
+            recognition.start();
+        });
+    </script>
+-->

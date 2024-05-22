@@ -168,7 +168,37 @@ startButton.addEventListener('click', () => {
 
 
     <script>
+         function callOpenAI(prompt) {
+            
+                return fetch('http://localhost:3000/api/openai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prompt: 'You are a interpreter working as a islamic interpreter and translate the text into english, extracted from speech to text, correct the words or sentence where needed based on your knowledge, as sometimes mispronounced words may be blasphemous or convery inaccurate meaning. Only some words are not recognized properly which are usually have the same sound so correct them based on the context of the texts, texts are usually related to Islam. Output nothing else than the translated text. For example  بے ایمان والو روزے تم پر فرض کیے گئے ہیں , After cross checking with the general and Islamic knowledge, it should be O beleivers and not O disbelievers, fasting has been enjoined upon you."\n\n'+ prompt,
+                        max_tokens: 500
+                    })
+                })
+                .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+                .then(data => {
+        if (data.choices && data.choices.length > 0 && data.choices[0].message && data.choices[0].message.content) {
+            return data.choices[0].message.content;
+        } else {
+            throw new Error('Invalid response format');
+        }
+    })
+                .catch(error => {
+                console.error('Error:', error);
+                return Promise.reject(error);
 
+            });
+}
         const startButton = document.getElementById('startButton');
         const output = document.getElementById('output');
         const recognition = new webkitSpeechRecognition(); // For Chrome, use webkitSpeechRecognition
@@ -191,31 +221,35 @@ startButton.addEventListener('click', () => {
         recognition.onstart = () => {
             console.log('Speech recognition started');
         };
-<!--           output1.style.color = 'black';-->
-<!--            output2.style.color = 'black';-->
-<!--            output3.style.color = 'black';-->
-<!--            output4.style.color = 'black';-->
-<!--            output5.style.color = 'black';-->
-<!--            output6.style.color = 'black';-->
-<!--            output7.style.color = 'black';-->
-<!--            output8.style.color = 'black';-->
-<!--            output9.style.color = 'black';-->
+           output1.style.color = 'black';
+           output2.style.color = 'black';
+            output3.style.color = 'black';
+            output4.style.color = 'black';
+            output5.style.color = 'black';
+            output6.style.color = 'black';
+            output7.style.color = 'black';
+            output8.style.color = 'black';
+           output9.style.color = 'black';
 
         recognition.onerror = (event) => {
             console.error('Speech recognition error:', event.error);
             recognition.start();
         };
 
-               recognition.onaudioend = (event) => {
+        recognition.onaudioend = (event) => {
             console.error('Speech recognition onaudioend:');
+            isRecognizing = false;
+
         };
 recognition.onspeechstart = () => {
   console.log("Speech has been detected");
 };
-                       recognition.onaudiostart = (event) => {
-            console.error('Speech recognition onaudiostart:');
-            recognition.start();
-        };
+recognition.onerror = (event) => {
+    console.error('Speech recognition error:', event.error);
+    if (event.error !== 'no-speech' && !isRecognizing) {
+        recognition.start();
+    }
+};
 
         recognition.onspeechend = () => {
   console.log("Speech has stopped being detected");
@@ -226,19 +260,17 @@ recognition.onspeechstart = () => {
         recognition.onresult = (event) => {
             const transcript = event.results[event.results.length - 1][0].transcript;
   //console.log('Speech recognition result', event.results);
-        console.log(transcript.length);
            console.log(transcript);
-         myArray.push(transcript);
-
-
-
-// push transcript to array
-
-
-// based on the length of array, set content on different output elements
-switch (myArray.length) {
+           callOpenAI(transcript)
+    .then(data => {
+        console.log(data);
+        // Proceed with further execution
+        myArray.push(data);
+        console.log('list');
+       console.log(myArray);
+       switch (myArray.length) {
     case 1:
-        output1.textContent = transcript;
+        output1.textContent =data;
         output1.classList.add("blue-background");
 
         output2.classList.remove("blue-background");
@@ -252,7 +284,7 @@ switch (myArray.length) {
 
         break;
     case 2:
-        output2.textContent = transcript;
+        output2.textContent = data;
                     output2.classList.add("blue-background");
                      output1.classList.remove("blue-background");
 
@@ -266,7 +298,7 @@ switch (myArray.length) {
 
         break;
     case 3:
-        output3.textContent = transcript;
+        output3.textContent = data;
                     output3.classList.add("blue-background");
 output1.classList.remove("blue-background");
 output2.classList.remove("blue-background");
@@ -281,7 +313,7 @@ output9.classList.remove("blue-background");
 
         break;
     case 4:
-        output4.textContent = transcript;
+        output4.textContent = data;
                     output4.classList.add("blue-background");
 
         output1.classList.remove("blue-background");
@@ -295,7 +327,7 @@ output9.classList.remove("blue-background");
 
         break;
     case 5:
-        output5.textContent = transcript;
+        output5.textContent = data;
                     output5.classList.add("blue-background");
   output1.classList.remove("blue-background");
 output2.classList.remove("blue-background");
@@ -309,7 +341,7 @@ output9.classList.remove("blue-background");
 
         break;
         case 6:
-        output6.textContent = transcript;
+        output6.textContent = data;
                     output6.classList.add("blue-background");
                        output1.classList.remove("blue-background");
                     output2.classList.remove("blue-background");
@@ -321,7 +353,7 @@ output9.classList.remove("blue-background");
                     output9.classList.remove("blue-background");
         break;
             case 7:
-        output7.textContent = transcript;
+        output7.textContent = data;
                     output7.classList.add("blue-background");
                       output1.style.color = 'black';
                         output1.classList.remove("blue-background");
@@ -335,7 +367,7 @@ output9.classList.remove("blue-background");
 // baqio ka font chota
         break;
           case 8:
-        output8.textContent = transcript;
+        output8.textContent = data;
 
                     output8.classList.add("blue-background");
                        output1.classList.remove("blue-background");
@@ -349,7 +381,7 @@ output9.classList.remove("blue-background");
 
         break;
           case 9:
-        output9.textContent = transcript;
+        output9.textContent = data;
                     //output9.classList.add("blue-background");
                     output1.classList.remove("blue-background");
                     output2.classList.remove("blue-background");
@@ -378,13 +410,24 @@ output9.classList.remove("blue-background");
             break;
 
 };
+    })
+    .catch(error => {
+        // Handle error
+    });
+
+
+
+
+// based on the length of array, set content on different output elements
+
 
 startButton.addEventListener('click', () => {
+    if (!isRecognizing) {
     console.log('Speech recognition started');
     recognition.start();
+    }
 });
 };
-
 
         startButton.addEventListener('click', () => {
             console.log('Speech recognition started');
