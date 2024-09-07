@@ -10,9 +10,9 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
-const apiKey = 'sk-proj-jjjjj';
+const apiKey = 'sk-proj-hT7qdT3kL9cc17mhB6TFT3BlbkFJExXpsbewU3K64I5OMRWe';
 
-app.post('/api/openai', async (req, res) => {
+app.post('/api/openaiooo', async (req, res) => {
     const { prompt, max_tokens } = req.body;
 
     try {
@@ -22,17 +22,21 @@ app.post('/api/openai', async (req, res) => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${apiKey}`
             },
+
             body: JSON.stringify({
-                model: 'gpt-4', // or another model like 'gpt-3.5-turbo'
-                messages: [{ role: 'user', content: prompt }],
-                max_tokens: max_tokens || 50
+                model: 'gpt-4o', // or another model like 'gpt-3.5-turbo'
+                messages: [{ role: 'assistant', content: prompt }],
+                max_tokens: max_tokens || 300
             })
         });
 
         const data = await response.json();
+        console.log(data);
         res.json(data);
     } catch (error) {
+
         console.error(error);
+
         res.status(500).send('Error communicating with OpenAI API');
     }
 });
