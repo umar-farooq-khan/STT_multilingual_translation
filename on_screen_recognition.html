@@ -6399,7 +6399,7 @@ for (i =0; i<splitted.length ; i++)
 
         recognition.onerror = (event) => {
             console.error('Speech recognition error:', event.error);
-            location.reload()
+           // location.reload()
             if (event.error !== 'no-speech' && !isRecognizing) {
                 recognition.start();
             }
