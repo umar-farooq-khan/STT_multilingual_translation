@@ -6315,8 +6315,8 @@ function stringSimilarity(text1, text2, surah) {
     const words2 = text2.split(/\s+/);
 
     // Create regex for phrases of 5 consecutive words
-    for (let i = 0; i <= words1.length - 5; i++) {
-        const phrase = words1.slice(i, i + 5).join(' ');  // Create 5-word phrase
+    for (let i = 0; i <= words1.length - 4; i++) {
+        const phrase = words1.slice(i, i + 4).join(' ');  // Create 5-word phrase
         const regex = new RegExp(phrase, 'i');  // Create case-insensitive regex
 
         if (regex.test(text2)) {
@@ -6399,7 +6399,7 @@ for (i =0; i<splitted.length ; i++)
 
         recognition.onerror = (event) => {
             console.error('Speech recognition error:', event.error);
-           // location.reload()
+            //location.reload()
             if (event.error !== 'no-speech' && !isRecognizing) {
                 recognition.start();
             }
@@ -6418,6 +6418,7 @@ for (i =0; i<splitted.length ; i++)
                     for (i=0; i<splitted.length ; i++)
                     {
                       stringSimilarity(splitted[i], transcript, i);
+                      document.getElementById('output2').textContent = transcript
 
                     }
                     };
