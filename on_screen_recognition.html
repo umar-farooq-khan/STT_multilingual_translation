@@ -22,6 +22,7 @@
 </head>
 <body>
     <button id="startButton">Start!!!</button>
+    <h1 id="surahname">Surah: </h1>
     <p id="output1"></p>
     <p id="output2"></p>
     <p id="output3"></p>
@@ -6282,13 +6283,15 @@ var fullquran = `بسم الله الرحمن الرحيم
 
 
 `
+startTime = Date.now();
+
     normalized_quran = normalizeArabic(fullquran);
     var splitted= fullquran.split('بسم الله الرحمن الرحيم')
 
-    const fuse = new Fuse([splitted], {
-        includeScore: true,
-        threshold: 0.7 // Adjust threshold for more or less strict matching
-    });
+ //   const fuse = new Fuse([splitted], {
+  //      includeScore: true,
+ //      threshold: 0.7 // Adjust threshold for more or less strict matching
+  //  });
 
 
 function stringSimilaritykk(a, b) {
@@ -6321,8 +6324,9 @@ function stringSimilarity(text1, text2, surah) {
 
         if (regex.test(text2)) {
             console.log(`Matching found: "${phrase}" from surah "${surah}"`);
-            document.getElementById('output1').textContent = `"${phrase}" from surah "${surah}"`
-
+            const endTime = Date.now(); // Get the end time
+            const executionTime = (endTime - startTime)/1000;
+            document.getElementById('surahname').textContent = `"${phrase}" from surah "${surah} in ${executionTime} seconds"`
             return true;  // Return true if 5-word match is found
         }
     }
@@ -6333,38 +6337,38 @@ function stringSimilarity(text1, text2, surah) {
 
 // Usage
 let simis=[]
- transcript = normalizeArabic('هم في صلاتهم خاشعون');
- console.log(splitted.length)
-for (i =0; i<splitted.length ; i++)
-{
-  stringSimilarity(splitted[i], transcript, i);
-}
+// transcript = normalizeArabic('هم في صلاتهم خاشعون');
+ //console.log(splitted.length)
+//for (i =0; i<splitted.length ; i++)
+//{
+ // stringSimilarity(splitted[i], transcript, i);
+//}
 
 
 
 
 
-   result = fuse.search(normalizeArabic('ذلك الكتاب لا ريب فيه هدى للمتقين'));
-        console.log('baqarah' , result)
-      result = fuse.search(normalizeArabic('هم في صلاتهم خاشعون'));
-             console.log('mominoon: ', result)
-        result = fuse.search(normalizeArabic('قل هو الله احد'));
-     console.log('last', result)
-     console.log('mominoon2')
+  // result = fuse.search(normalizeArabic('ذلك الكتاب لا ريب فيه هدى للمتقين'));
+  //      console.log('baqarah' , result)
+  //    result = fuse.search(normalizeArabic('هم في صلاتهم خاشعون'));
+  //           console.log('mominoon: ', result)
+  //      result = fuse.search(normalizeArabic('قل هو الله احد'));
+  //   console.log('last', result)
+  //   console.log('mominoon2')
 
-                if (result.length > 0) {
-                    // Find the match with the lowest score
-                    const bestMatch = result.reduce((lowest, match) => {
-                        return (match.score < lowest.score) ? match : lowest;
-                    });
+<!--                if (result.length > 0) {-->
+<!--                    // Find the match with the lowest score-->
+<!--                    const bestMatch = result.reduce((lowest, match) => {-->
+<!--                        return (match.score < lowest.score) ? match : lowest;-->
+<!--                    });-->
 
-                            console.log("Matched String:", bestMatch);
-                        }
+<!--                            console.log("Matched String:", bestMatch);-->
+<!--                        }-->
 
-                 if (result.length==1)
-                 {
-               console.log("Single matchedMatched String Index:", result[0].refIndex);
-                 }
+      //           if (result.length==1)
+      //           {
+          //     console.log("Single matchedMatched String Index:", result[0].refIndex);
+       //          }
 
 
 
@@ -6384,7 +6388,7 @@ for (i =0; i<splitted.length ; i++)
 
         const recognition = new webkitSpeechRecognition(); // For Chrome, use webkitSpeechRecognition
         recognition.continuous = true;
-        recognition.interimResults = false;
+        recognition.interimResults = true;
         recognition.lang = 'ar-SA';
         let myArray = [];
         let isRecognizing = false;
@@ -6414,6 +6418,7 @@ for (i =0; i<splitted.length ; i++)
         recognition.onresult = (event) => {
             var transcript = event.results[event.results.length - 1][0].transcript;
                 console.log(transcript)
+
                  transcript = normalizeArabic(transcript);
                     for (i=0; i<splitted.length ; i++)
                     {
