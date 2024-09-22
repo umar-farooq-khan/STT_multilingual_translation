@@ -168,37 +168,49 @@ startButton.addEventListener('click', () => {
 
 
     <script>
-         function callOpenAI(prompt) {
-            
-                return fetch('http://localhost:3000/api/openai', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        prompt: 'You are a interpreter working as a islamic interpreter and translate the text into english, extracted from speech to text, correct the words or sentence where needed based on your knowledge, as sometimes mispronounced words may be blasphemous or convery inaccurate meaning. Only some words are not recognized properly which are usually have the same sound so correct them based on the context of the texts, texts are usually related to Islam. Output nothing else than the translated text. For example  بے ایمان والو روزے تم پر فرض کیے گئے ہیں , After cross checking with the general and Islamic knowledge, it should be O beleivers and not O disbelievers, fasting has been enjoined upon you."\n\n'+ prompt,
-                        max_tokens: 500
-                    })
-                })
-                .then(response => {
+        function callOpenAI(prompt) {
+            //prompt: "please properly translate the Irish accent english to English. The text is recognized by Speech to text engine. So please correct it, according to the context. " + prompt,
+            //prompt: "You are a Multilingual (Arabic, Urdu, English) islamic interpreter having diverse knowledge of Islam, english, fiqh, Islamic jurisprudence and expert on translating from Urdu to English usually for the sermons and Islamic Lectures. Please be noted that this sermon/lecture is bilingual of Urdu and Arabic. So please leave the arabic even if you are given. Your task is to translate only the last input; from urdu text into english even if it is not making sense(translate it at your best capability) but it should not be against the teachings of Islam. You might need to change some words because some words might be mistakenly wrote as the text is extracted from speech to text engine, correct the words or sentence, avoid outputting any blasphemous sentence, and evaluate what you are outputting as Islam is a sensitive topic. fix where needed based on your Islamic knowledge, fiqh and context,and according to the context of the topic what is right now. Sometimes mispronounced words may be wrongly converted to text, and it makes something very inaccurate or blasphemous in terms of Islamic circle or it might convey inaccurate meaning. Only some words are not recognized properly which are usually have the same sound so correct them based on the context of the texts. Output nothing else than the translated text. For example  بے ایمان والو روزے تم پر فرض کیے گئے ہیں , After cross checking with the general and Islamic knowledge, it should be Oh believers and not Oh disbelievers, fasting has been enjoined upon you. Here is the input: " + prompt,
+            //prompt: "You are an excellent Irish local person who is good in accents of all parts of Ireland, mostly derry and all difficult accent of Ireland and knows english very well. The text is recognized by Speech to text engine. please properly fix the input text to proper sentences by considering similar sounded words in Irish accents and output the response. So please correct it, according to the context. And the person is using short form like hadnt instead of had not: Just Fix, dont output anything else:  " + prompt,
+            //prompt: "You are a Multilingual (Arabic, Urdu, English) islamic interpreter having diverse knowledge of Islam, english, fiqh, Islamic jurisprudence and expert on translating from Urdu to English usually for the sermons and Islamic Lectures. Please be noted that this sermon/lecture is bilingual of Urdu and Arabic. So please leave the arabic even if you are given. Your task is to translate only the last input; from urdu text into english even if it is not making sense(translate it at your best capability) but it should not be against the teachings of Islam. You might need to change some words because some words might be mistakenly wrote as the text is extracted from speech to text engine, correct the words or sentence, avoid outputting any blasphemous sentence, and evaluate what you are outputting as Islam is a sensitive topic. fix where needed based on your Islamic knowledge, fiqh and context,and according to the context of the topic what is right now. Sometimes mispronounced words may be wrongly converted to text, and it makes something very inaccurate or blasphemous in terms of Islamic circle or it might convey inaccurate meaning. Only some words are not recognized properly which are usually have the same sound so correct them based on the context of the texts. Output nothing else than the translated text. For example  بے ایمان والو روزے تم پر فرض کیے گئے ہیں , After cross checking with the general and Islamic knowledge, it should be Oh believers and not Oh disbelievers, fasting has been enjoined upon you. Here is the input: " + prompt,
+            //prompt: "You are a Multilingual (Urdu, English) interpreter having diverse knowledge of urdu and english, good in talking and listening in bilingual of Urdu, english. and expert on translating from Urdu to English. Please be noted that the input text is bilingual of Urdu and English. They are using English words in a sentence of Urdu, and some sentence or words in a urdu sentence. Your task is to translate only the last input; from urdu text into english even if it is not making sense(translate it at your best capability). You might need to change some words because some words might be mistakenly wrote as the text is extracted from speech to text engine, correct the words or sentence, fix according to the context of the topic what is right now. Sometimes mispronounced words may be wrongly converted to text, and it makes something very inaccurate. Only some words are not recognized properly which are usually have the same sound so correct them based on the context of the texts. Output nothing else than the translated text. Kabhi kabhi I was like...... ok now Here is the input: " + prompt,
+            //best
+            //prompt: "You are a Multilingual Australian (Arabic, English) islamic interpreter having diverse knowledge of Islam, English literature and knows english homophones, Homonyms, Accents and Dialects, Context-Dependent Words, Slang, Colloquialisms fiqh, Islamic jurisprudence and expert on correcting mistake which happened in speech to text generation and rewrite it to English usually for the sermons and Islamic Lectures. Please be noted that this sermon/lecture is bilingual of Arabic, quranic verses, hadith, arabic words  and australian accent English. Your task is to translate only the last input and understand the context from previous inputs; fix it at your best capability but it should not be against the teachings of Islam. You might need to change some words because some words might be mistakenly wrote/interpreted because the text is extracted from speech to text engine, correct the words or sentence, avoid outputting any blasphemous sentence, and evaluate what you are outputting as Islam is a sensitive topic. fix where needed based on your Islamic knowledge, fiqh and context,and according to the context of the topic what is right now. Sometimes mispronounced words may be wrongly converted to text, and it makes something very inaccurate or might be blasphemous in terms of Islamic circle or it might convey inaccurate meaning. Only some words are not recognized properly which are usually have the same sound so correct them based on the context of the texts. Output nothing else than the translated text. For example, 'Worship Allah, Him and Him alone' is misrecognized as 'Worship Allah himalayan'. Ok now here is the input: " + prompt,
+            //prompt: "You are irish local and an interpreter having diverse knowledge of Irish dialects, accents, English literature and knows english and irish homophones, Homonyms, Accents and Dialects, Context-Dependent Words, Slang, Colloquialisms, expert on correcting mistake which happened in speech to text generation and rewrite it to correct mistakes. Fix it at your best capability. You might need to change some words because some words might be mistakenly wrote/interpreted because the text is extracted from speech to text engine, correct the words or sentence based on context,and according to the context of the topic what is right now. Sometimes mispronounced words may be wrongly converted to text from speech, and it makes something very inaccurate. Only some words are not recognized properly which are usually have the same sound so correct them based on the context of the texts. Output nothing else than the translated text. For example, 'car' is misrecognized as 'care' as they speak this way in Irish accent. Process only the Last input from the text. Ok now here is the input: " + prompt,
+            //for english sermon us ke andaer urud thori thori
+           //prompt:  "You are a multilingual Islamic interpreter proficient in Arabic, Urdu, and English. Your expertise spans across Islamic studies, fiqh (Islamic jurisprudence), and English translation, often utilized during sermons and lectures. The sermon/lecture you're translating is bilingual, in Urdu and Arabic, with occasional English phrases. Your task is to accurately translate the last input from Urdu to English, even if it seems nonsensical, while ensuring it aligns with Islamic teachings. Correct any mispronounced words or inaccuracies resulting from speech-to-text conversion. Maintain sensitivity to Islamic beliefs and context. Output only the translated text. For example, if the input is 'بے ایمان والو روزے تم پر فرض کیے گئے ہیں', after verification, it should be 'Oh believers, fasting has been enjoined upon you,' not 'Oh disbelievers.' Here is the input:\n " + prompt,
+           //prompt : "You are a multilingual Islamic interpreter proficient in Arabic, Urdu, English. Your expertise spans across Islamic studies, fiqh (Islamic jurisprudence), and English translation, often utilized during sermons and lectures. The sermon/lecture you're translating is bilingual, in Urdu and Arabic, with occasional English phrases. Your task is to accurately translate the last input from Urdu to English taking the context from the whole passage, even if it seems nonsensical, but strictly ensuring it aligns with Islamic teachings and not against. Correct any mispronounced words or inaccuracies resulting from speech-to-text conversion. Maintain sensitivity to Islamic beliefs and context. Output only the translated text. For example, if the input is 'بے ایمان والو روزے تم پر فرض کیے گئے ہیں', as ay eman walo and beimaan walo are homophones and after verification, it should be 'Oh believers, fasting has been enjoined upon you,' not 'Oh disbelievers, fasting has been enjoined upon you .' ok understood, so here is the input: " + prompt
+           // prompt : You are a Multilingual Australian (Arabic, English) islamic interpreter having diverse knowledge of Islam, English literature and knows english homophones, Homonyms, Accents and Dialects, Context-Dependent Words, Slang, Colloquialisms fiqh, Islamic jurisprudence and expert on correcting mistake which happened in speech to text generation and rewrite it to English usually for the sermons and Islamic Lectures. Please be noted that this sermon/lecture is bilingual of Arabic, quranic verses, hadith, arabic words  and australian accent English. Your task is to translate only the last input and understand the context from previous inputs; fix it at your best capability but it should not be against the teachings of Islam. You might need to change some words because some words might be mistakenly wrote/interpreted because the text is extracted from speech to text engine, correct the words or sentence, avoid outputting any blasphemous sentence, and evaluate what you are outputting as Islam is a sensitive topic. fix where needed based on your Islamic knowledge, fiqh and context,and according to the context of the topic what is right now. Sometimes mispronounced words may be wrongly converted to text, and it makes something very inaccurate or might be blasphemous in terms of Islamic circle or it might convey inaccurate meaning. Only some words are not recognized properly which are usually have the same sound so correct them based on the context of the texts. Output nothing else than the translated text. For example, 'Worship Allah, Him and Him alone' is misrecognized as 'Worship Allah himalayan'. Ok now here is the input:
+    return fetch('http://localhost:3000/api/openaioo', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            prompt: "" + prompt,
+            max_tokens: 500
+        })
+    })
+    .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         return response.json();
     })
-                .then(data => {
+    .then(data => {
+        console.log(prompt);
         if (data.choices && data.choices.length > 0 && data.choices[0].message && data.choices[0].message.content) {
             return data.choices[0].message.content;
         } else {
             throw new Error('Invalid response format');
         }
     })
-                .catch(error => {
-                console.error('Error:', error);
-                return Promise.reject(error);
-
-            });
+    .catch(error => {
+        console.error('Error:', error);
+        return Promise.reject(error);
+    });
 }
+
         const startButton = document.getElementById('startButton');
         const output = document.getElementById('output');
         const recognition = new webkitSpeechRecognition(); // For Chrome, use webkitSpeechRecognition
@@ -214,7 +226,9 @@ startButton.addEventListener('click', () => {
 
         recognition.continuous = true;
         recognition.interimResults = false;
-        recognition.lang = 'ur-PK';
+       // recognition.lang = 'ar-SA';
+       recognition.lang = 'en-IE';
+
         let sentences = []; // Declare and initialize the sentences array here
         let myArray = []
         const maxSentences = 13;
@@ -244,6 +258,7 @@ startButton.addEventListener('click', () => {
 recognition.onspeechstart = () => {
   console.log("Speech has been detected");
 };
+
 recognition.onerror = (event) => {
     console.error('Speech recognition error:', event.error);
     if (event.error !== 'no-speech' && !isRecognizing) {
@@ -259,9 +274,24 @@ recognition.onerror = (event) => {
 
         recognition.onresult = (event) => {
             const transcript = event.results[event.results.length - 1][0].transcript;
-  //console.log('Speech recognition result', event.results);
-           console.log(transcript);
-           callOpenAI(transcript)
+
+            let allTranscripts = '';
+
+            for (let i = 0; i < event.results.length; i++) {
+                if( i+1 == event.results.length)
+                {
+                allTranscripts += 'Last input:\n\n'
+                allTranscripts += event.results[i][0].transcript + ' \n\n';
+
+
+                }
+                else{
+                       allTranscripts += event.results[i][0].transcript + ' \n\n';
+                }
+            }
+            console.log('last input:', transcript);
+            console.log('All transcripts:', allTranscripts);
+            callOpenAI(allTranscripts)
     .then(data => {
         console.log(data);
         // Proceed with further execution
